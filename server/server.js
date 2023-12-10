@@ -26,10 +26,10 @@ server.use("/", userRoutes);
 const connectDB = require('./config/db');
 
 // Listening to server
-const PORT = process.env.PORT || 9000
+const PORT = process.env.PORT || 9000;
 
 server.listen(PORT, () => {
-    connectDB()
+    connectDB();
     console.log(`Server is running on http://localhost:${PORT}`);
 });
 
