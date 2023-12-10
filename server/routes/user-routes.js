@@ -1,11 +1,15 @@
-const express = require("express");
-const route = express.Router();
+const express = require('express');
+const router = express.Router();
+const authenticateUser = require('../middleware/authentication');
+const userController = require("../controllers/user-controller");
 
-// Home page route
-route.get("/", (req, res) => {
-  res.status(200).send({ msg: "Home Page" });
-});
+// Sign Up
+router.post('/signup', userController.userRegister);
 
-module.exports = route;
+// Login
+router.post('/login', userController.userLogin);
 
+// Secure user data
+router.get('/', authenticateUser, userController.userActionController);
 
+module.exports = router;
