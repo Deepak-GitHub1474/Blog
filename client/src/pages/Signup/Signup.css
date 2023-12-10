@@ -1,0 +1,113 @@
+.signup-container {
+    display: flex;
+    overflow-x: auto;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.75rem;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    color: white;
+    width: 25rem;
+    background-color: #2d2d2d;
+    margin: 0 0.5rem;
+    margin-top: 4.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.form-container h1 {
+    font-size: 1.4rem;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #f9632d;
+    padding: 0.2rem 0;
+}
+
+.form-container h1:hover {
+    background-color: #d43c05;
+}
+
+.avatar-label {
+    cursor: pointer;
+    margin: 0 auto;
+    margin-top: 2rem;
+}
+
+.avatar {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.avatar-input {
+    display: none;
+}
+
+.inputs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.inputs-container label {
+    font-weight: 600;
+}
+
+.username,
+.email,
+.password {
+    background-color: transparent;
+    padding:0.5rem 0.5rem;
+    border: 1px solid #f9632d;
+    border-radius: 0.25rem;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+}
+
+.btn {
+    margin-top: 0.5rem;
+    background-color: #f9632d;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+}
+
+.btn:hover {
+    background-color: #d43c05;
+}
+
+.form-container p {
+    text-align: center;
+    font-weight: 600;
+}
+
+.login-link {
+    cursor: pointer;
+    color: #f9632d;
+    text-decoration: none;
+    margin-left: 0.5rem;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}

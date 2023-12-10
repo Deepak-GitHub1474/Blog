@@ -7,9 +7,10 @@ const userController = require("../controllers/user-controller");
 router.post('/signup', userController.userRegister);
 
 // Login
-router.post('/login', userController.userLogin);
+router.post('/signin', userController.userLogin);
 
 // Secure user data
-router.get('/', authenticateUser, userController.userActionController);
+// router.get('/', authenticateUser, userController.userActionController);
+router.get('/', userController.userActionController);
 
 module.exports = router;

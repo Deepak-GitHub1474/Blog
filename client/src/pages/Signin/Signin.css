@@ -1,0 +1,22 @@
+.signin-container {
+    display: flex;
+    overflow-x: auto;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.email-label {
+    margin-top: 2rem;
+}
+
+.sigin-link {
+    cursor: pointer;
+    color: #f9632d;
+    text-decoration: none;
+    margin-left: 0.5rem;
+}
+
+.sigin-link:hover {
+    text-decoration: underline;
+}
