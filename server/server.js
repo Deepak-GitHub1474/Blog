@@ -22,10 +22,14 @@ server.use(cors({
 const userRoutes = require("./routes/user-routes");
 server.use("/", userRoutes);
 
+// DB
+const connectDB = require('./config/db');
+
 // Listening to server
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT || 9000
 
 server.listen(PORT, () => {
+    connectDB()
     console.log(`Server is running on http://localhost:${PORT}`);
 });
 
