@@ -1,14 +1,13 @@
 const UserModel = require("../models/user-model");
 const PostModel = require("../models/post-model");
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-
-const secretKey = process.env.SECRET_KEY;
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const secretKey = process.env.JWT_SECRET;
 
 // Sign Up
 exports.userRegister = async (req, res) => {
     try {
-        const { username, email, password } = req.body;
+        const { username, email, password, file } = req.body;
         const user = await UserModel.findOne({ email });
 
         if (user) {
@@ -21,6 +20,7 @@ exports.userRegister = async (req, res) => {
             username,
             email,
             password: hashedPassword,
+            file
         });
 
         await newUser.save();
@@ -50,13 +50,13 @@ exports.userLogin = async (req, res) => {
             username: user.username,
             email: user.email,
             userId: user._id
-        }, secretKey);
-
+        }, secretKey, { expiresIn: "1d" });
+        
         res.cookie('token', token, { httpOnly: true });
-        res.json({ message: 'Login successfully 😊' });
+        res.json({ message: 'Login successfully 😊', user: user });
 
     } catch (error) {
-        res.status(500).json({ error: 'An error occurred while lofin 🥴' });
+        res.status(500).json({ error: 'An error occurred while login 🥴' });
     }
 }
 

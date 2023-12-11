@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -15,6 +15,9 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, "Password is required"]
+    },
+    file: {
+        type: String,
     }
 });
 

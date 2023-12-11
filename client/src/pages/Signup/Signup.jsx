@@ -1,18 +1,24 @@
+import axios from "axios";
 import "./Signup.css";
+
 import { useState } from "react";
 import { BsPersonCircle } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import { BASE_URL } from "../../config/config.js";
 
 function Signup() {
 
     const [signupDetails, setSignupDetails] = useState({
         email: '',
-        fullName: '',
+        username: '',
         password: '',
         avatar: ''
     });
 
     const [previewImage, setPreviewImage] = useState("");
+
+    const navigate = useNavigate();
 
     function handleUserInput(e) {
         const {name, value} = e.target;
@@ -37,9 +43,16 @@ function Signup() {
         })
     }
 
+    function handleSubmit(e) {
+        e.preventDefault()
+        axios.post(`${BASE_URL}/signup`, { username, email, password })
+            .then(res => navigate('/signin'))
+            .catch(err => console.log(err))
+    }
+
     return (
         <div className="signup-container">
-            <form  className="form-container">
+            <form  className="form-container" onSubmit={handleSubmit}>
                 <h1>Sign Up</h1>
                 <label htmlFor="image_uploads" className="avatar-label">
                     { previewImage ? (
@@ -57,16 +70,16 @@ function Signup() {
                     accept=".jpg, .jpeg, .png, .svg"
                 />
                 <div className="inputs-container">
-                    <label htmlFor="fullName">Name</label>
+                    <label htmlFor="username">Name</label>
                     <input 
                         onChange={handleUserInput}
-                        value={signupDetails.fullName}
+                        value={signupDetails.username}
                         required
                         type="text" 
-                        name="fullName"
+                        name="username"
                         className="username"
                         placeholder="enter your username..."
-                        id="fullName" />
+                        id="username" />
                 </div>
                 <div className="inputs-container">
                     <label htmlFor="email">Email</label>

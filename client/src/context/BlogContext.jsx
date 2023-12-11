@@ -15,7 +15,7 @@ export function BlogProvider({ children }) {
   const [user, setUser] = useState({
     username: null,
     email: null
-  })
+})
 
   axios.defaults.withCredentials = true; // Global Credential
 
@@ -23,7 +23,7 @@ export function BlogProvider({ children }) {
     const fetchUser = async () => {
       try {
         const response = await axios.get(`${BASE_URL}/`);
-        console.log(response.data);
+        console.log("base url",response.data);
         setUser(response.data);
       } catch (err) {
         console.log(err);

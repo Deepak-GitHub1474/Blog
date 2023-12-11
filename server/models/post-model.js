@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const PostSchema = new mongoose.Schema({
     title: String,
@@ -7,7 +7,7 @@ const PostSchema = new mongoose.Schema({
     blog: String,
     email: String,
     username: String,
-});
+})
 
 const PostModel = mongoose.model('posts', PostSchema)
 

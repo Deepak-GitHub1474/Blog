@@ -134,3 +134,9 @@ li {
     width: 97%;
     border-top: 0.5px solid #4a4a4a;
 }
+
+@media (max-width: 768px) {
+    .dropdown-container-wrapper {
+        right: 2rem;
+    }
+}

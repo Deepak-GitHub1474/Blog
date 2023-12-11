@@ -1,16 +1,22 @@
-const express = require('express');
-const router = express.Router();
-const authenticateUser = require('../middleware/authentication');
-const userController = require("../controllers/user-controller");
+const express = require("express");
+const route = express.Router();
+const { registerValidation, loginValidation, authenticateUser } = require("../middlewares/user-validation");
+const userController = require("../controllers/user-controllers");
 
-// Sign Up
-router.post('/signup', userController.userRegister);
+// Test
+route.get("/test", (req, res) => {
+  res.json({ message: "Server is up!" });
+});
 
-// Login
-router.post('/signin', userController.userLogin);
+// User Action Controller
+route.get("/",authenticateUser, userController.userActionController);
 
-// Secure user data
-// router.get('/', authenticateUser, userController.userActionController);
-router.get('/', userController.userActionController);
+// User Register
+route.post("/signup", registerValidation, userController.userRegister);
 
-module.exports = router;
+// User Login
+route.post("/signin", loginValidation, userController.userLogin);
+
+module.exports = route;
+
+
