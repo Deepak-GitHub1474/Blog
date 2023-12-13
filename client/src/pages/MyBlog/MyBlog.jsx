@@ -1,5 +1,3 @@
-import "./Home.css";
-
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -12,7 +10,7 @@ import { BsThreeDots } from "react-icons/bs";
 import { FaRegHeart, FaRegComment, FaHeart, FaRegBookmark, FaBookmark } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
 
-function Home() {
+function MyBlog() {
 
     const [blogs, setBlogs] = useState([]);
     const [likedBlogs, setLikedBlogs] = useState([]);
@@ -24,11 +22,13 @@ function Home() {
     // Get all blogs
     useEffect(() => {
         axios.get(`${BASE_URL}/blog`)
-            .then(blogs => {
-                setBlogs(blogs.data)
+            .then((response) => {
+                // Filter the blogs based on the user's email
+                const filteredBlogs = response.data.filter((blog) => blog.email === user.email);
+                setBlogs(filteredBlogs);
             })
-            .catch(err => console.log(err))
-    }, []);
+            .catch((err) => console.log(err));
+    }, [user.email]); // Include user.email in the dependency array to trigger re-fetch when the user changes
 
     // Handle DialogueBox
     function toggleDialogueBox(blogId) {
@@ -83,10 +83,10 @@ function Home() {
                         <div className="username-container">
                             <div>
                                 {/* TODO set the name respected to different user's blogs */}
-                                <span>{blog.username}</span> 
+                                <span>{user.username}</span> 
                                 <GoDotFill size="10" className="dot" onClick={() => handleLike(blog._id)} />
                             </div>
-                            <BsThreeDots size="32" onClick={() => toggleDialogueBox(blog._id)} cursor="pointer"/>
+                            <BsThreeDots size="32" onClick={() => toggleDialogueBox(blog._id)} />
                             {selectedBlog === blog._id &&
                                 <ul className="edit-delete-container">
                                     <Link to={`/updateblog/${blog._id}`} className="Link"><li>Edit</li></Link>
@@ -106,16 +106,16 @@ function Home() {
                         <div className="like-comment-share-save-container">
                             <div className="like-comment-share-container" >
                                 {!likedBlogs.includes(blog._id) ?
-                                    <FaRegHeart size="28" color="#fff" cursor="pointer" onClick={() => handleLike(blog._id)} /> :
-                                    <FaHeart size="28" color="#ff0000" cursor="pointer" onClick={() => handleLike(blog._id)} />
+                                    <FaRegHeart size="28" color="#fff" onClick={() => handleLike(blog._id)} /> :
+                                    <FaHeart size="28" color="#ff0000" onClick={() => handleLike(blog._id)} />
                                 }
-                                <FaRegComment size="28" color="#fff" cursor="pointer" />
-                                <FiSend size="28" color="#fff" cursor="pointer"/>
+                                <FaRegComment size="28" color="#fff" />
+                                <FiSend size="28" color="#fff" />
                             </div>
                             <div className="save-container">
                                 {!bookMarkBlogs.includes(blog._id) ?
-                                    <FaRegBookmark size="28" color="#fff" cursor="pointer" onClick={() => handleBookmark(blog._id)} /> :
-                                    <FaBookmark size="28" color="#f9632d" cursor="pointer" onClick={() => handleBookmark(blog._id)} /> 
+                                    <FaRegBookmark size="28" color="#fff" onClick={() => handleBookmark(blog._id)} /> :
+                                    <FaBookmark size="28" color="#f9632d" onClick={() => handleBookmark(blog._id)} /> 
                                 }
                             </div>
                         </div>
@@ -124,7 +124,7 @@ function Home() {
                 )) :
                 <div className="landing-page">
                     <div className="landing-page-cover-container"></div>
-                    <div onClick={() => navigate("/signin")}>
+                    <div onClick={() => navigate("/user/login")}>
                         <button className="landing-page-btn">Login</button>
                     </div>
                     <div className="landing-page-content-container">
@@ -140,4 +140,4 @@ function Home() {
     )
 }
 
-export default Home;
+export default MyBlog;

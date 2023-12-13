@@ -23,7 +23,6 @@ export function BlogProvider({ children }) {
     const fetchUser = async () => {
       try {
         const response = await axios.get(`${BASE_URL}/`);
-        console.log("base url",response.data);
         setUser(response.data);
       } catch (err) {
         console.log(err);

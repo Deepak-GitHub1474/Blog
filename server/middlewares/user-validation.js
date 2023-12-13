@@ -23,22 +23,22 @@ exports.loginValidation = (req, res, next) => {
 // User Validation
 const jwt = require("jsonwebtoken");
 
-exports.authenticateUser = (req, res, next) => {
-  const token = req.cookies.token;
-
-  if (!token) {
-    return res.status(401).json({ message: 'Authentication failed' });
-  }
-
-  try {
-    const decodedToken = jwt.verify(token, secretKey);
-    req.userData = decodedToken;
-    next();
-  } catch (error) {
-    return res.status(401).json({ message: 'Authentication failed' });
-  }
-};
-
-
+exports.verifyUser = (req, res, next) => {
+    const token = req.cookies.token;
+    // console.log(token);
+    if (!token) {
+        return res.json("The token is missing")
+    } else {
+        jwt.verify(token, "jwt-secret-key", (err, decoded) => {
+            if (err) {
+                return res.json("The token is wrong")
+            } else {
+                req.email = decoded.email;
+                req.username = decoded.username;
+                next()
+            }
+        })
+    }
+}
 
 

@@ -9,33 +9,19 @@ import { BASE_URL } from "../../config/config.js";
 
 function Signup() {
 
-    const [signupDetails, setSignupDetails] = useState({
-        email: '',
-        username: '',
-        password: '',
-        avatar: ''
-    });
-
+    const [username, setUsername] = useState();
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [avatar, setAvatar] = useState("");
     const [previewImage, setPreviewImage] = useState("");
 
     const navigate = useNavigate();
-
-    function handleUserInput(e) {
-        const {name, value} = e.target;
-        setSignupDetails({
-            ...signupDetails,
-            [name]: value
-        })
-    }
 
     function handleImage(e) {
         e.preventDefault();
         const uploadedImage = e.target.files[0];
         if(!uploadedImage) return;
-        setSignupDetails({
-            ...signupDetails,
-            avatar: uploadedImage
-        });
+        setAvatar(uploadedImage);
         const fileReader = new FileReader();
         fileReader.readAsDataURL(uploadedImage);
         fileReader.addEventListener("load", function () {
@@ -43,13 +29,13 @@ function Signup() {
         })
     }
 
-    function handleSubmit(e) {
+    const handleSubmit = (e) => {
         e.preventDefault()
         axios.post(`${BASE_URL}/signup`, { username, email, password })
-            .then(res => navigate('/signin'))
-            .catch(err => console.log(err))
+             .then(res => navigate('/signin'))
+             .catch(err => console.log("Error while sign up!"))
     }
-
+    
     return (
         <div className="signup-container">
             <form  className="form-container" onSubmit={handleSubmit}>
@@ -72,8 +58,7 @@ function Signup() {
                 <div className="inputs-container">
                     <label htmlFor="username">Name</label>
                     <input 
-                        onChange={handleUserInput}
-                        value={signupDetails.username}
+                        onChange={e => setUsername(e.target.value)}
                         required
                         type="text" 
                         name="username"
@@ -84,8 +69,7 @@ function Signup() {
                 <div className="inputs-container">
                     <label htmlFor="email">Email</label>
                     <input 
-                        onChange={handleUserInput}
-                        value={signupDetails.email}
+                        onChange={e => setEmail(e.target.value)}
                         required
                         type="text" 
                         name="email"
@@ -97,8 +81,7 @@ function Signup() {
                     <label htmlFor="password">Password</label>
                     <input 
                         required
-                        onChange={handleUserInput}
-                        value={signupDetails.password}
+                        onChange={e => setPassword(e.target.value)}
                         type="password" 
                         name="password"
                         className="password"

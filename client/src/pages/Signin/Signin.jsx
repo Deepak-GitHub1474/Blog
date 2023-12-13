@@ -33,7 +33,6 @@ function Signin() {
                 <div className="inputs-container">
                     <label htmlFor="email" className="email-label">Email</label>
                     <input 
-                        value={email}
                         required
                         type="text" 
                         name="email"
@@ -47,7 +46,6 @@ function Signin() {
                     <label htmlFor="password">Password</label>
                     <input 
                         required
-                        value={password}
                         type="password" 
                         name="password"
                         className="password"

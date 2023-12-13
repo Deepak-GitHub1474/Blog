@@ -18,7 +18,7 @@ export default function Navbar() {
         axios.get(`${BASE_URL}/logout`)
             .then(res => {
                 if (res.data === "Success")
-                    window.location.href = "/user/login";
+                    window.location.href = "/signin";
             }).catch(err => console.log(err))
     }
 
@@ -51,8 +51,8 @@ export default function Navbar() {
                     }
                     {width <= 768 && <span className="home-popup">Home</span>}
                     {width > 768 ? 
-                        <li><Link to="/blog/add" className="header-link">Add Blog</Link></li> : 
-                        <Link to="/blog/add" className="add-blog-link"><MdAddTask size="32" color="#fff"/></Link>
+                        <li><Link to="addBlog" className="header-link">Add Blog</Link></li> : 
+                        <Link to="addBlog" className="add-blog-link"><MdAddTask size="32" color="#fff"/></Link>
                     }
                     {width <= 768 && <span className="add-blog-popup">Add Blog</span>}
                     {width > 768 ? 
