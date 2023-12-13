@@ -1,0 +1,81 @@
+.skeleton-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10rem;
+}
+
+.skeleton-card {
+    max-width: 500px;
+    width: 90vw;
+    height: 500px;
+    background-color: #b0b0b0;
+    box-shadow: 0 0 5px #b0b0b0;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    position: relative;
+    animation: skeletonFadeInOut 1.5s infinite alternate;
+    overflow: hidden;
+}
+
+@keyframes skeletonFadeInOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
+
+.name-edit-delete-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.skeleton-card-cover {
+    margin: 0 auto;
+}
+
+.skeleton-card-title {
+    width: 100%;
+}
+
+.skeleton-card-description {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.skeleton-icons-container {
+    display: flex;
+    gap: 1rem;
+    position: absolute;
+    bottom: 3rem;
+}
+
+.skeleton-like-comment-share-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.save-icon {
+    position: absolute;
+    right: -13rem;
+}
+
+.skeleton-read-btn {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
