@@ -3,6 +3,7 @@ import "./Signin.css";
 import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from 'axios';
+import toast from "react-hot-toast";
 
 import {BASE_URL} from "../../config/config.js";
 import { useBlog } from '../../context/BlogContext';
@@ -14,15 +15,20 @@ function Signin() {
     const { user } = useBlog();
     
     axios.defaults.withCredentials = true;
+    
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
+
         axios.post(`${BASE_URL}/signin`, { email, password })
             .then(res => {
-                if (res.data.message === "Success") {
+                if (res.data.msg === "Success") {
                     window.location.href = "/";
                 }
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                toast.error(err.response.data.msg);
+                console.log(err);
+            })
     }
 
     return (

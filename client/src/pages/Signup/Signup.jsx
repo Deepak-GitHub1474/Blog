@@ -4,16 +4,18 @@ import "./Signup.css";
 import { useState } from "react";
 import { BsPersonCircle } from "react-icons/bs";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import { BASE_URL } from "../../config/config.js";
 import { useBlog } from "../../context/BlogContext.jsx";
+import { isEmail, isValidPassword } from "../../helpers/RegExMatch";
 
 function Signup() {
 
+    const [avatar, setAvatar] = useState("");
     const [username, setUsername] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [avatar, setAvatar] = useState("");
     const [previewImage, setPreviewImage] = useState("");
     const {user} = useBlog();
     const navigate = useNavigate();
@@ -31,10 +33,27 @@ function Signup() {
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
+
+        if(username.length < 3) {
+            toast.error("Name should be atleast of 5 characters");
+            return;
+        }
+        if(!isEmail(email)) {
+            toast.error("Invalid email provided");
+            return;
+        }
+        if(!isValidPassword(password)) {
+            toast.error("Invalid password provided, password should 6-16 character long with atleast a number and a special character");
+            return;
+        }
+
         axios.post(`${BASE_URL}/signup`, { username, email, password })
              .then(res => navigate('/signin'))
-             .catch(err => console.log("Error while sign up!"))
+             .catch(err => {
+                toast.error(err.response.data.msg);
+                console.log(err);
+             })
     }
     
     return (

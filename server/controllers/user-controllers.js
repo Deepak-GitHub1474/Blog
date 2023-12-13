@@ -17,7 +17,7 @@ exports.userRegister = (req, res) => {
         .then(existingUser => {
             if (existingUser) {
                 // If email already exists, send a response indicating it
-                res.status(400).send({ message: "Email already exists" })
+                res.status(400).send({ msg: "Email already exists" })
             } else {
                 // If email is unique, hash the password and create the new user
                 bcrypt.hash(password, 10)
@@ -25,7 +25,7 @@ exports.userRegister = (req, res) => {
                         UserModel.create({ username, email, password: hash })
                             .then(user => {
                                 // If user is created successfully, send the success response
-                                res.status(200).send({ message: "Successfully registered", user: user });
+                                res.status(200).send({ msg: "Successfully registered", user: user });
                             })
                             .catch(err => res.json(err))
                     })
@@ -47,8 +47,8 @@ exports.userLogin = (req, res) => {
                         const token = jwt.sign({ email: user.email, username: user.username },
                         process.env.JWT_SECRET, { expiresIn: "1d" })
                         res.cookie("token", token)
-                        // res.send({ message: "Success", user: user })
-                        res.send({ message: "Success"})
+                        res.status(200).send({ msg: "Success", user: user })
+                        // res.send({ msg: "Success"})
 
                     } else {
                         res.status(401).send({ msg: "Wrong Password" })
