@@ -82,7 +82,6 @@ function MyBlog() {
                     <div key={blog._id} className="my-blog" onDoubleClick={() => handleLike(blog._id)}>
                         <div className="username-container">
                             <div>
-                                {/* TODO set the name respected to different user's blogs */}
                                 <span>{user.username}</span> 
                                 <GoDotFill size="10" className="dot" onClick={() => handleLike(blog._id)} />
                             </div>

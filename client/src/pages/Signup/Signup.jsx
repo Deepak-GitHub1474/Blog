@@ -3,9 +3,10 @@ import "./Signup.css";
 
 import { useState } from "react";
 import { BsPersonCircle } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import { BASE_URL } from "../../config/config.js";
+import { useBlog } from "../../context/BlogContext.jsx";
 
 function Signup() {
 
@@ -14,7 +15,7 @@ function Signup() {
     const [password, setPassword] = useState();
     const [avatar, setAvatar] = useState("");
     const [previewImage, setPreviewImage] = useState("");
-
+    const {user} = useBlog();
     const navigate = useNavigate();
 
     function handleImage(e) {
@@ -38,7 +39,8 @@ function Signup() {
     
     return (
         <div className="signup-container">
-            <form  className="form-container" onSubmit={handleSubmit}>
+            {!user.email ?
+              <form  className="form-container" onSubmit={handleSubmit}>
                 <h1>Sign Up</h1>
                 <label htmlFor="image_uploads" className="avatar-label">
                     { previewImage ? (
@@ -94,7 +96,12 @@ function Signup() {
                 <p>
                     Already have an account ? <Link to="/signin" className="login-link">Login</Link>
                 </p>
-            </form>
+              </form>
+            :
+            <div>
+                <Navigate to="/" />
+            </div>
+            }
         </div>
     );
 }

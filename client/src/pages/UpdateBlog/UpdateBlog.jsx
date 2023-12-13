@@ -1,9 +1,12 @@
 import "./UpdateBlog.css";
 
+import { IoIosCloseCircle } from "react-icons/io";
+
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
+import { useBlog } from '../../context/BlogContext';
 import { BASE_URL } from "../../config/config.js";
 
 function UpdateBlog() {
@@ -13,10 +16,11 @@ function UpdateBlog() {
         file: "",
         description: "",
         blog: ""
-    })
+    });
 
-    const { id } = useParams()
-    const navigate = useNavigate()
+    const { user } = useBlog();
+    const navigate = useNavigate();
+    const { id } = useParams();
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -58,53 +62,70 @@ function UpdateBlog() {
 
     return (
         <div className="update-blog-container-wrapper">
-            <div className="update-blog-container">
-                <div className="my-blog">
-                    <div className="blogs-cover-container">
-                        <img src={input.file} alt="" className="blogs-cover" />
+            {user.email ? 
+                <>
+                    <div className="update-blog-container">
+                        <div className="my-blog">
+                            <div className="blogs-cover-container">
+                                <img src={input.file} alt="" className="blogs-cover" />
+                            </div>
+                            <p className="blog-title">
+                                <b>{input.title}</b>
+                            </p>
+                            <div className="blog-description">
+                                <p>{input.description}</p>
+                            </div>
+                            <Link to={`/readblog/${id}`}><button className="read-btn">Read</button></Link>
+                        </div>
                     </div>
-                    <p className="blog-title">
-                        <b>{input.title}</b>
-                    </p>
-                    <div className="blog-description">
-                        <p>{input.description}</p>
-                    </div>
-                    <Link to={`/readblog/${id}`}><button className="read-btn">Read</button></Link>
-                </div>
-            </div>
-            <form className="update-form-container" onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    value={input.title}
-                    name="title"
-                    placeholder="Enter Title of Your Story"
-                    onChange={handleInputChange}
-                />
-                <input
-                    type="url"
-                    value={input.file}
-                    name="file"
-                    placeholder="Enter Url of Blog Image"
-                    onChange={handleInputChange}
-                />
-                <input
-                    type="text"
-                    name="description"
-                    placeholder="Type Short Description for Your Blog"
-                    value={input.description}
-                    onChange={handleInputChange}
-                />
-                <textarea
-                    name="blog"
-                    className="blog"
-                    placeholder="Type Your Blog"
-                    value={input.blog}
-                    onChange={handleInputChange}
-                ></textarea>
+                    <form className="update-form-container" onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            value={input.title}
+                            name="title"
+                            placeholder="Enter Title of Your Story"
+                            onChange={handleInputChange}
+                        />
+                        <input
+                            type="url"
+                            value={input.file}
+                            name="file"
+                            placeholder="Enter Url of Blog Image"
+                            onChange={handleInputChange}
+                        />
+                        <input
+                            type="text"
+                            name="description"
+                            placeholder="Type Short Description for Your Blog"
+                            value={input.description}
+                            onChange={handleInputChange}
+                        />
+                        <textarea
+                            name="blog"
+                            placeholder="Type Your Blog"
+                            value={input.blog}
+                            onChange={handleInputChange}
+                        ></textarea>
 
-                <button className="update-blog-btn">Update</button>
-                <button className="close-blog-btn">Close</button>
-            </form>
+                        <button className="update-blog-btn">Update</button>
+                        <IoIosCloseCircle className="close-blog-btn" onClick={() => navigate("/")}/>
+                    </form>
+                </>
+            :
+                <div className="landing-page">
+                    <div className="landing-page-cover-container"></div>
+                    <div onClick={() => navigate("/signin")}>
+                        <button className="landing-page-btn">Login</button>
+                    </div>
+                    <div className="landing-page-content-container">
+                        <h1>
+                            Welcome to your professional community blog...
+                        </h1>
+                        <h2>Login to explore...</h2>
+                        <img src="https://res.cloudinary.com/dlt4ash36/image/upload/v1701709205/1031604_Featured-image-WP-Recipe-Maker_Op1_040821-1_x94dx6.png" alt="landing-page-cover" />
+                    </div>
+                </div>
+            }
         </div>
     )
 }

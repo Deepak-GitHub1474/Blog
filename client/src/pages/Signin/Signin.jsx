@@ -1,7 +1,7 @@
 import "./Signin.css";
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from 'axios';
 
 import {BASE_URL} from "../../config/config.js";
@@ -27,7 +27,7 @@ function Signin() {
 
     return (
         <div className="signin-container">
-            <form onSubmit={handleSubmit} className="form-container">
+            {!user.email ?<form onSubmit={handleSubmit} className="form-container">
                 <h1>Login Page</h1>
                 
                 <div className="inputs-container">
@@ -61,6 +61,8 @@ function Signin() {
                     Don't have an account ? <Link to="/signup" className="sigin-link">Sign Up</Link>
                 </p>
             </form>
+            :
+            <Navigate to="/" />}
         </div>
     );
 }
