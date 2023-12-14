@@ -46,7 +46,13 @@ exports.userLogin = (req, res) => {
                     if (response) {
                         const token = jwt.sign({ email: user.email, username: user.username },
                         process.env.JWT_SECRET, { expiresIn: "1d" })
-                        res.cookie("token", token)
+                        res.cookie("token", token, {
+                            httpOnly: true,
+                            sameSite: 'none',
+                            secure: true,
+                            domain: '.blog-server-f390.onrender.com',
+                            path: '/'
+                        });
                         res.status(200).send({ msg: "Success", user: user })
                         // res.send({ msg: "Success"})
 

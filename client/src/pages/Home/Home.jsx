@@ -23,11 +23,18 @@ function Home() {
 
     // Get all blogs
     useEffect(() => {
-        axios.get(`${BASE_URL}/blog`)
-            .then(blogs => {
-                setBlogs(blogs.data)
-            })
-            .catch(err => console.log(err))
+        // axios.get(`${BASE_URL}/blog`)
+        //     .then(blogs => {
+        //         setBlogs(blogs.data)
+        //     })
+        //     .catch(err => console.log(err))
+
+            axios.get(`${BASE_URL}/blog`, { withCredentials: true })
+   .then(blogs => {
+       setBlogs(blogs.data)
+   })
+   .catch(err => console.log(err))
+
     }, []);
 
     // Handle DialogueBox
