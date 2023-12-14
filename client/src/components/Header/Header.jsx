@@ -19,6 +19,7 @@ export default function Navbar() {
             .then(res => {
                 if (res.data.msg === "Success")
                     window.location.href = "/signin";
+                    window.location.reload();
             }).catch(err => console.log(err))
     }
 
