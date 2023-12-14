@@ -127,6 +127,15 @@ exports.deleteBlogID = (req, res) => {
 
 // User Logout
 exports.UserLogout = (req, res) => {
-    res.clearCookie("token");
-    return res.status(200).send({ msg: "Success" });
+
+    res.cookie("token", "", {
+        expires: new Date(0),
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true,
+        domain: '.blog-server-f390.onrender.com',
+        path: '/'
+    });
+    return res.json({ msg: "Logged out successfully" });
 };
+
