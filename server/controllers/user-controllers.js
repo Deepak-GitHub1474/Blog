@@ -46,13 +46,15 @@ exports.userLogin = (req, res) => {
                     if (response) {
                         const token = jwt.sign({ email: user.email, username: user.username },
                         process.env.JWT_SECRET, { expiresIn: "1d" })
-                        res.cookie("token", token, {
-                            httpOnly: true,
-                            sameSite: 'none',
-                            secure: true,
-                            domain: '.blog-server-f390.onrender.com',
-                            path: '/'
-                        });
+                        if (req.path !== '/signin' || req.path !== '/signup') {
+                            res.cookie("token", token, {
+                                httpOnly: true,
+                                sameSite: 'none',
+                                secure: true,
+                                domain: '.blog-server-f390.onrender.com',
+                                path: '/'
+                            });
+                        }
                         res.status(200).send({ msg: "Success", user: user })
                         // res.send({ msg: "Success"})
 
@@ -129,5 +131,5 @@ exports.deleteBlogID = (req, res) => {
 // User Logout
 exports.UserLogout = (req, res) => {
     res.clearCookie("token");
-    return res.json("Success")
-}
+    return res.status(200).send({ msg: "Success" });
+};

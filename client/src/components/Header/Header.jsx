@@ -17,7 +17,7 @@ export default function Navbar() {
     const handleLogout = () => {
         axios.get(`${BASE_URL}/logout`)
             .then(res => {
-                if (res.data === "Success")
+                if (res.data.msg === "Success")
                     window.location.href = "/signin";
             }).catch(err => console.log(err))
     }

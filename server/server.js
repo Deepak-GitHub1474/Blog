@@ -12,9 +12,8 @@ server.use(express.json());
 server.use(cookieParser());
 server.use(express.static("public"));
 
-
 server.use(cors({
-    origin: ["http://localhost:5173", "*"],
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
     exposedHeaders: ['set-cookie'],
