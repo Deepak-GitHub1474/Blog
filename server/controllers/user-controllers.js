@@ -46,17 +46,14 @@ exports.userLogin = (req, res) => {
                     if (response) {
                         const token = jwt.sign({ email: user.email, username: user.username },
                         process.env.JWT_SECRET, { expiresIn: "1d" })
-                        if (req.path !== '/signin' || req.path !== '/signup') {
-                            res.cookie("token", token, {
-                                httpOnly: true,
-                                sameSite: 'none',
-                                secure: true,
-                                domain: '.blog-server-f390.onrender.com',
-                                path: '/'
-                            });
-                        }
+                        res.cookie("token", token, {
+                            httpOnly: true,
+                            sameSite: 'none',
+                            secure: true,
+                            domain: '.blog-server-f390.onrender.com',
+                            path: '/'
+                        });
                         res.status(200).send({ msg: "Success", user: user })
-                        // res.send({ msg: "Success"})
 
                     } else {
                         res.status(401).send({ msg: "Wrong Password" })
