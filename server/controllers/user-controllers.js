@@ -136,6 +136,6 @@ exports.UserLogout = (req, res) => {
         domain: '.blog-server-f390.onrender.com',
         path: '/'
     });
-    return res.json({ msg: "Logged out successfully" });
+    return res.json({ msg: "Success" });
 };
 
