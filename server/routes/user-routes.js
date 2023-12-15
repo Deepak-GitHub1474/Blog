@@ -3,12 +3,12 @@ const route = express.Router();
 const { registerValidation, loginValidation, verifyUser } = require("../middlewares/user-validation");
 const userController = require("../controllers/user-controllers");
 
-// User Action Controller
 // Test
 route.get("/test", (req, res) => {
   res.json({ message: "Server is up!" });
 });
 
+// Home
 route.get("/", verifyUser, userController.userActionController);
 
 // User Register

@@ -13,12 +13,11 @@ server.use(cookieParser());
 server.use(express.static("public"));
 
 server.use(cors({
-    origin: "http://localhost:5173",
-    // origin: ["http://localhost:5173", "https://blog-beige-alpha.vercel.app", "*"],
+    // origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "https://blog-beige-alpha.vercel.app", "*"],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
     exposedHeaders: ['set-cookie'],
-    // Set SameSite to None and Secure to false for development environment
     cookie: {
         sameSite: 'none',
         secure: false,

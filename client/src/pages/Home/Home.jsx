@@ -100,11 +100,11 @@ function Home() {
                   onClick={() => handleLike(blog._id)}
                 />
               </div>
-              <BsThreeDots
+              {blog.email === user.email && <BsThreeDots
                 size="32"
                 onClick={() => toggleDialogueBox(blog._id)}
                 cursor="pointer"
-              />
+              />}
               {selectedBlog === blog._id && (
                 <ul className="edit-delete-container">
                   <Link to={`/updateblog/${blog._id}`} className="Link">

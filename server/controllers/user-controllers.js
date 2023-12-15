@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 
 // New User blog update delete controll
 exports.userActionController = (req, res) => {
-    return res.json({ email: req.email, username: req.username })
+    return res.json({ email: req.email, username: req.username });
 }
 
 // User Register
