@@ -13,7 +13,8 @@ server.use(cookieParser());
 server.use(express.static("public"));
 
 server.use(cors({
-    origin: ["https://blog-beige-alpha.vercel.app/", "*"],
+    origin: "http://localhost:5173",
+    // origin: ["http://localhost:5173", "https://blog-beige-alpha.vercel.app", "*"],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
     exposedHeaders: ['set-cookie'],
