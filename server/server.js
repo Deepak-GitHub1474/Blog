@@ -13,7 +13,7 @@ server.use(cookieParser());
 server.use(express.static("public"));
 
 server.use(cors({
-    origin: "https://blog-beige-alpha.vercel.app",
+    origin: "https://blog-client-pbti.onrender.com",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
     exposedHeaders: ['set-cookie'],
