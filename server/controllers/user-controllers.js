@@ -50,7 +50,6 @@ exports.userLogin = (req, res) => {
                             httpOnly: true,
                             sameSite: 'none',
                             secure: true,
-                            domain: '.blog-server-f390.onrender.com',
                             path: '/'
                         });
                         res.status(200).send({ msg: "Success", user: user })
@@ -133,7 +132,6 @@ exports.UserLogout = (req, res) => {
         httpOnly: true,
         sameSite: 'none',
         secure: true,
-        domain: '.blog-server-f390.onrender.com',
         path: '/'
     });
     return res.json({ msg: "Success" });
