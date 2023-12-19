@@ -66,7 +66,7 @@ exports.userLogin = (req, res) => {
                         process.env.JWT_SECRET, { expiresIn: "1d" })
                         res.cookie("token", token, {
                             httpOnly: true,
-                            sameSite: 'none',
+                            sameSite: process.env.CORS_SAME_SITE,
                             secure: true,
                             path: '/'
                         });
@@ -94,8 +94,8 @@ exports.addNewBlog = (req, res) => {
         email: email,
         username: username
     })
-        .then(result => res.json("Success"))
-        .catch(err => res.json(err))
+        .then(result => res.status(200).json("Success"))
+        .catch(err => res.status(500).json(err))
 }
 
 // Get all blog
@@ -123,7 +123,7 @@ exports.readBlogByID = (req, res) => {
 
 // New User blog update delete controll
 exports.userActionController = (req, res) => {
-    return res.json({ email: req.email, username: req.username, avatar: req.avatar });
+    return res.status(200).json({ email: req.email, username: req.username, avatar: req.avatar });
 }
 
 // Update blog by id
@@ -136,15 +136,15 @@ exports.updateBlogByID = (req, res) => {
             description: req.body.description,
             blog: req.body.blog
         }
-    ).then(result => res.json("Success"))
-     .catch(err => res.json(err))
+    ).then(result => res.status(200).json("Success"))
+     .catch(err => res.status(500).json(err))
 }
 
 // Delete Blog
 exports.deleteBlogID = (req, res) => {
     PostModel.findByIdAndDelete({ _id: req.params.id })
-        .then(result => res.json("Success"))
-        .catch(err => res.json(err))
+        .then(result => res.status(200).json("Success"))
+        .catch(err => res.status(500).json(err))
 }
 
 // User Logout
@@ -153,9 +153,9 @@ exports.UserLogout = (req, res) => {
     res.cookie("token", "", {
         expires: new Date(0),
         httpOnly: true,
-        sameSite: 'none',
+        sameSite: process.env.CORS_SAME_SITE,
         secure: true,
         path: '/'
     });
-    return res.json({ msg: "Success" });
+    return res.status(200).json({ msg: "Success" });
 };

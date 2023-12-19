@@ -14,14 +14,14 @@ server.use(cookieParser());
 server.use(express.static("public"));
 
 server.use(cors({
-    // origin: "http://localhost:5173",
-    origin: "https://blog-client-pbti.onrender.com",
+    // origin: process.env.LOCALHOST_ORIGIN,
+    origin: process.env.HOSTED_ORIGIN,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
-    exposedHeaders: ['set-cookie'],
+    exposedHeaders: [process.env.CORS_EXPOSED_HEADER],
     cookie: {
-        sameSite: 'none',
-        secure: false,
+        sameSite: process.env.CORS_SAME_SITE,
+        secure: true,
     },
 }));
 
