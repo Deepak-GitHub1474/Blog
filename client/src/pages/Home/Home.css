@@ -6,7 +6,7 @@
     justify-content: center;
     gap: 1rem;
     position: absolute;
-    top: 5.5rem;
+    top: 5.8rem;
     z-index: 99;
 }
 
@@ -30,7 +30,14 @@
 .users-avatar {
     width: 60px;
     height: 60px;
-    border-radius: 50%
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px #ffa500,0 0 0 2px #ff1493;
+    cursor: pointer;
+}
+
+.users-avatar:hover {
+    transform: scale(1.05);
+    transition: 0.2s ease-in-out;
 }
 
 .blogs-container,
