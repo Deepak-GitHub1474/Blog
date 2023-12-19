@@ -1,8 +1,41 @@
 /* Home & MyBlog Styling */
 
+.users-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    position: absolute;
+    top: 5.5rem;
+    z-index: 99;
+}
+
+.users-avatar-name-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.users-name {
+    font-size: 0.8rem;
+    max-width: 60px;
+    min-width: 60px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+.users-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%
+}
+
 .blogs-container,
 .myblogs-container {
-    margin-top: 10rem;
+    margin-top: 12rem;
     display: flex;
     align-items: center;
     justify-content: center;

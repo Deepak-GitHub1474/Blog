@@ -8,11 +8,13 @@ require("dotenv").config();
 const server = express();
 
 // Middlewares
-server.use(express.json());
+server.use(express.json({ limit: "25mb" }));
+server.use(express.urlencoded({ limit: "25mb", extended: true  }));
 server.use(cookieParser());
 server.use(express.static("public"));
 
 server.use(cors({
+    // origin: "http://localhost:5173",
     origin: "https://blog-client-pbti.onrender.com",
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,

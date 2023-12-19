@@ -64,7 +64,7 @@ export default function Navbar() {
                         <div className="dropdown-container" onClick={toggleDropdown}>
                             <div className="avatar-container">
                                 <img
-                                    src="https://res.cloudinary.com/dlt4ash36/image/upload/v1700893730/User-Avatar-Profile-Download-PNG-Isolated-Image_mrgemq.png"
+                                    src={!user.avatar ? "https://res.cloudinary.com/dlt4ash36/image/upload/v1700893730/User-Avatar-Profile-Download-PNG-Isolated-Image_mrgemq.png": user.avatar}
                                     alt="dp" className="profile-image" />
                             </div>
                             {width > 290 && <p className="profile-name">{user.username.charAt(0).toUpperCase() + user.username.slice(1)}</p>}

@@ -25,7 +25,6 @@ const jwt = require("jsonwebtoken");
 
 exports.verifyUser = (req, res, next) => {
     const token = req.cookies.token;
-    // console.log(token);
     if (!token) {
         return res.json("The token is missing")
     } else {
@@ -35,6 +34,7 @@ exports.verifyUser = (req, res, next) => {
             } else {
                 req.email = decoded.email;
                 req.username = decoded.username;
+                req.avatar = decoded.avatar;
                 next()
             }
         })

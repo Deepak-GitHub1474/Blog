@@ -125,3 +125,7 @@ body {
 button:hover {
     background-color: #d43c05;
 }
+
+.loader-container img {
+    width: 100px;
+}

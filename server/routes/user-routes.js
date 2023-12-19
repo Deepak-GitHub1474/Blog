@@ -14,6 +14,9 @@ route.get("/", verifyUser, userController.userActionController);
 // User Register
 route.post("/signup", registerValidation, userController.userRegister);
 
+// Upload Avatar
+route.post("/uploadImage", userController.uploadImage);
+
 // User Login
 route.post("/signin", loginValidation, userController.userLogin);
 

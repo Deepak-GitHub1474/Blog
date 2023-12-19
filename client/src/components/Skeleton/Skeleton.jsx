@@ -1,23 +1,13 @@
 import "./Skeleton.css";
 
-import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 function SkeletonComp() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Simulated data loading delay for demonstration
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsLoading(false);
-    }, 5000); // Adjust as needed or replace with actual data fetching logic
-    return () => clearTimeout(timeout);
-  }, []);
 
   return (
     <div className="skeleton-container">
-        {isLoading && <div className="skeleton-card">
+        <div className="skeleton-card">
             <div className="name-edit-delete-container">
                 <div className="user-container">
                     <Skeleton width={150} height={25} />
@@ -64,7 +54,7 @@ function SkeletonComp() {
             <div className="skeleton-read-btn">
                 <Skeleton height={25} />
             </div>
-        </div>}
+        </div>
     </div>
   );
 }

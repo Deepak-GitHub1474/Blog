@@ -2,30 +2,48 @@ const UserModel = require("../models/user-model");
 const PostModel = require("../models/post-model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const cloudinary = require("cloudinary").v2;
 
-// New User blog update delete controll
-exports.userActionController = (req, res) => {
-    return res.json({ email: req.email, username: req.username });
-}
+// Upload Avatar
+exports.uploadImage = (req, res) => {
+    cloudinary.config({
+        cloud_name: process.env.CLOUD_NAME,
+        api_key: process.env.API_KEY,
+        api_secret: process.env.API_SECRET,
+    });
+
+    const image = req.body.image;
+    try {
+      cloudinary.uploader.upload(image, (error, result) => {
+        if (result && result.secure_url) {
+          res.send(result.secure_url);
+        } else {
+          res.status(500).send(`Error while uploading image: ${error.message}`);
+        }
+      });
+    } catch (error) {
+      res.status(500).send(`Error while processing image upload: ${error.message}`);
+    }
+};
 
 // User Register
 exports.userRegister = (req, res) => {
-    const { username, email, password } = req.body;
+    const {avatar, username, email, password } = req.body;
 
     // Check if the email already exists in the database
     UserModel.findOne({ email: email })
         .then(existingUser => {
             if (existingUser) {
                 // If email already exists, send a response indicating it
-                res.status(400).send({ msg: "Email already exists" })
+                res.status(400).json({ msg: "Email already exists" })
             } else {
                 // If email is unique, hash the password and create the new user
                 bcrypt.hash(password, 10)
                     .then(hash => {
-                        UserModel.create({ username, email, password: hash })
+                        UserModel.create({avatar, username, email, password: hash })
                             .then(user => {
                                 // If user is created successfully, send the success response
-                                res.status(200).send({ msg: "Successfully registered", user: user });
+                                res.status(200).json({ msg: "Successfully registered", user: user });
                             })
                             .catch(err => res.json(err))
                     })
@@ -44,7 +62,7 @@ exports.userLogin = (req, res) => {
             if (user) {
                 bcrypt.compare(password, user.password, (err, response) => {
                     if (response) {
-                        const token = jwt.sign({ email: user.email, username: user.username },
+                        const token = jwt.sign({ email: user.email, username: user.username, avatar:user.avatar },
                         process.env.JWT_SECRET, { expiresIn: "1d" })
                         res.cookie("token", token, {
                             httpOnly: true,
@@ -52,14 +70,14 @@ exports.userLogin = (req, res) => {
                             secure: true,
                             path: '/'
                         });
-                        res.status(200).send({ msg: "Success", user: user })
+                        res.status(200).json({ msg: "Success", user: user })
 
                     } else {
-                        res.status(401).send({ msg: "Wrong Password" })
+                        res.status(401).json({ msg: "Wrong Password" })
                     }
                 })
             } else {
-                res.status(404).send({ msg: "No Account associated with this email" })
+                res.status(404).json({ msg: "No Account associated with this email" })
             }
         })
 }
@@ -103,6 +121,11 @@ exports.readBlogByID = (req, res) => {
         .catch(err => console.log(err))
 }
 
+// New User blog update delete controll
+exports.userActionController = (req, res) => {
+    return res.json({ email: req.email, username: req.username, avatar: req.avatar });
+}
+
 // Update blog by id
 exports.updateBlogByID = (req, res) => {
     PostModel.findByIdAndUpdate(
@@ -136,4 +159,3 @@ exports.UserLogout = (req, res) => {
     });
     return res.json({ msg: "Success" });
 };
-
