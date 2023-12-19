@@ -1,5 +1,4 @@
 // Server running URL
 
-// export const BASE_URL = "http://localhost:7000";
-export const BASE_URL = "https://blog-server-f390.onrender.com";
-
+// export const BASE_URL = import.meta.env.VITE_LOCALHOST_ORIGIN;
+export const HOSTED_URL = import.meta.env.VITE_HOSTED_ORIGIN;

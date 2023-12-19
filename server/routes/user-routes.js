@@ -38,6 +38,9 @@ route.delete('/blog/:id', verifyUser, userController.deleteBlogID);
 // User Logout
 route.get("/logout", userController.UserLogout);
 
+// Get All Users
+route.get("/users", userController.getAllUsers);
+
 module.exports = route;
 
 

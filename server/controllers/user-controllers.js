@@ -159,3 +159,23 @@ exports.UserLogout = (req, res) => {
     });
     return res.status(200).json({ msg: "Success" });
 };
+
+// Get all users [Filter username and avatar]
+exports.getAllUsers = (req, res) => {
+    UserModel.find()
+        .then(users => {
+            const uniqueUsers = users.reduce((acc, cur) => {
+                const { username, avatar } = cur;
+                const existingUser = acc.find(user => user.username === username);
+
+                if (!existingUser) {
+                    acc.push({ username, avatar });
+                }
+
+                return acc;
+            }, []);
+
+            res.status(200).json(uniqueUsers);
+        })
+        .catch(err => res.status(500).json("Error while finding users",err));
+}

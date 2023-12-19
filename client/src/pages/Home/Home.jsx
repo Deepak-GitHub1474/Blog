@@ -103,6 +103,14 @@ function Home() {
     return acc;
   }, []);
 
+  // Get all users [Filter username and avatar]
+  useEffect(() => {
+    axios
+        .get(`${BASE_URL}/users`)
+        .then(user => setUsers(user))
+        .catch(err => console.log("Error while fetching users"))
+  }, []);
+
   return (
     <div className={user.email ? "blogs-container" : ""}>
       {user.email && (
