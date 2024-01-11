@@ -107,7 +107,7 @@ function Home() {
   useEffect(() => {
     axios
         .get(`${BASE_URL}/users`)
-        .then(user => setUsers(user))
+        .then(user => setUsers(user.data))
         .catch(err => console.log("Error while fetching users"))
   }, []);
 
@@ -115,12 +115,12 @@ function Home() {
     <div className={user.email ? "blogs-container" : ""}>
       {user.email && (
         <div className="users-container">
-          {uniqueUsers.map((uniqueUser, _idx) => (
+          {uniqueUsers.map((user, _idx) => (
             <div className="users-avatar-name-container" key={_idx}>
               <div className="users-avatar-container">
-                <img src={uniqueUser.file} className="users-avatar"/>
+                <img src={user.file} className="users-avatar"/>
               </div>
-              <span className="users-name">{uniqueUser.username.toLowerCase()}</span>
+              <span className="users-name">{user.username.toLowerCase()}</span>
             </div>
           ))}
         </div>
@@ -222,7 +222,7 @@ function Home() {
             </div>
           ) : (
             <>
-              <div className="landing-page-cover-container"></div>
+              <div className="background-cover"></div>
               <div onClick={() => navigate("/signin")}>
                 <button className="landing-page-btn">Login</button>
               </div>

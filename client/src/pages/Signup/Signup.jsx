@@ -92,7 +92,7 @@ function Signup() {
     axios
       .post(`${BASE_URL}/signup`, { avatar, username, email, password })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         toast.success("Successfully sign up");
         navigate("/signin");
       })
@@ -168,7 +168,7 @@ function Signup() {
           <p>
             Already have an account ?
             <Link to="/signin" className="login-link">
-              Login
+              SignIn
             </Link>
           </p>
         </form>

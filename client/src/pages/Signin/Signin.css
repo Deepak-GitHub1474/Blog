@@ -1,9 +1,9 @@
 .signin-container {
     display: flex;
-    overflow-x: auto;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    overflow: hidden;
 }
 
 .email-label {
@@ -14,7 +14,7 @@
     cursor: pointer;
     color: #f9632d;
     text-decoration: none;
-    margin-left: 0.5rem;
+    margin-left: 0.2rem;
 }
 
 .sigin-link:hover {

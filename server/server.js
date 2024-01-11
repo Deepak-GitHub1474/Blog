@@ -14,8 +14,8 @@ server.use(cookieParser());
 server.use(express.static("public"));
 
 server.use(cors({
-    // origin: process.env.LOCALHOST_ORIGIN,
-    origin: process.env.HOSTED_ORIGIN,
+    origin: process.env.LOCALHOST_ORIGIN,
+    // origin: process.env.HOSTED_ORIGIN,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
     exposedHeaders: [process.env.CORS_EXPOSED_HEADER],

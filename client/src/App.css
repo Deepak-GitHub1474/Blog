@@ -21,7 +21,7 @@ body {
     overflow: hidden;
 }
 
-.landing-page-cover-container {
+.background-cover {
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -78,36 +78,6 @@ body {
     animation: glow 1s alternate infinite;
 }
 
-.home-popup,
-.add-blog-popup,
-.my-blog-popup {
-    background-color: #000000;
-    padding: 0.1rem 0.5rem;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    display: none;
-    position: absolute;
-    bottom: 0.1rem;
-}
-
-.home-popup {
-    left: 0.4rem;
-}
-
-.add-blog-popup {
-    left: 3.5rem;
-}
-
-.my-blog-popup {
-    left: 7rem;
-}
-
-.home-link:hover+.home-popup,
-.add-blog-link:hover+.add-blog-popup,
-.my-blog-link:hover+.my-blog-popup {
-    display: block;
-}
-
 @keyframes glow {
     0% {
         filter: drop-shadow(0 0 10px #f9632d);
@@ -128,4 +98,85 @@ button:hover {
 
 .loader-container img {
     width: 100px;
+}
+
+/* Sign in and Sing up form container */
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.75rem;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    width: 25rem;
+    color: #ffffff;
+    background-color: #0a0a0a;
+    margin: 0 0.5rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px #ffffff;
+}
+
+.form-container:hover {
+    box-shadow: 0 0 10px #008000;
+}
+
+.form-container h1 {
+    font-size: 1.4rem;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #f9632d;
+    padding: 0.2rem 0;
+}
+
+.form-container h1:hover {
+    background-color: #d43c05;
+}
+
+.form-container .btn {
+    margin-top: 0.5rem;
+    background-color: #f9632d;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+}
+
+.form-container .btn:hover {
+    background-color: #d43c05;
+}
+
+.btn-loader {
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-left: 0.5rem;
+    margin-top: 0.1rem;
+    position: absolute;
+}
+
+@keyframes loader {
+    0% {
+        transform: rotate(0deg);
+        color: #ffffff;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        color: #ffffff;
+    }
+}
+
+.btn-loader {
+    animation: loader 1s linear infinite;
 }

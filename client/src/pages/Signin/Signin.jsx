@@ -5,6 +5,8 @@ import { Link, Navigate } from "react-router-dom";
 import axios from 'axios';
 import toast from "react-hot-toast";
 
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+
 import {BASE_URL} from "../../config/config.js";
 import { useBlog } from '../../context/BlogContext';
 
@@ -12,6 +14,7 @@ function Signin() {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [loading, setLoading] = useState(false);
     const { user } = useBlog();
     
     axios.defaults.withCredentials = true;
@@ -22,6 +25,7 @@ function Signin() {
         axios.post(`${BASE_URL}/signin`, { email, password })
             .then(res => {
                 if (res.data.msg === "Success") {
+                    setLoading(prevLoading => !prevLoading);
                     window.location.href = "/";
                 }
             })
@@ -61,10 +65,11 @@ function Signin() {
                     />
                 </div>
                 <button className="btn">
-                    Sign In
+                    {loading ? "LogIn..." : "LogIn"}
+                    {loading && <AiOutlineLoading3Quarters className="btn-loader" />}
                 </button>
                 <p className="text-center">
-                    Don't have an account ? <Link to="/signup" className="sigin-link">Sign Up</Link>
+                    Don't have an account ? <Link to="/signup" className="sigin-link">SignUp</Link>
                 </p>
             </form>
             :

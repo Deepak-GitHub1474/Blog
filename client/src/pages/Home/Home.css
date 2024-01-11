@@ -157,12 +157,6 @@
     margin-top: 0.4rem;
 }
 
-@media (max-width: 450px) {
-    .my-blog {
-        height: 550px;
-    }
-}
-
 .blog-title {
     margin-bottom: 0.5rem;
     text-align: center;
@@ -174,7 +168,7 @@
     background-color: #f9632d;
     border: none;
     padding: 0.5rem;
-    font-size: 16px;
+    font-size: 1rem;
     position: absolute;
     bottom: 1rem;
     cursor: pointer;
@@ -200,5 +194,9 @@
     .landing-page-content-container h2 {
         font-size: 1.1rem;
         right: 1rem;
+    }
+
+    .my-blog {
+        height: 550px;
     }
 }
