@@ -2,10 +2,10 @@
 
 ## Description
 
-    This is a blog app which has many functionality like adding your own blogs,
-    editing, deleting, and reading cpmplete blogs. Also users can watch public blogs too.
-    there are user authorization is require to perform CRUD operation, which makes your
-    blog secure.
+  This is a blog app which has many functionality like adding your own blogs,
+  editing, deleting, and reading full blogs. Also users can watch public 
+  blogs too.to mange blogs user authorization is require to perform CRUD operation, 
+  which makes your blog secure.
 
 ## Use
 
