@@ -7,13 +7,14 @@
     there are user authorization is require to perform CRUD operation, which makes your
     blog secure.
 
-## Usage
+## Use
 
-- TO use the application users needs to register first by filling all the inputs field.
+- To use the application, users needs to register first by filling all the input fields.
 - After successfully register user can use their email and password to login.
 - As soon as user login, user will land on home page of blogs.
-- Now user will have access to add their own blog, later can edit or delete their own blogs.
-- There is My Blog navigation which will show only their own blogs.
+- Now user will have access to add their blog, later can edit or delete their blogs.
+- There is My Blog navigation which will show only their blogs.
+- There is dedicated edit page where use can update their blog.
 - Easy to log out by just click on Logout button.
 
 ## Features:
